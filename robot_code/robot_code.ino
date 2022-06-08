@@ -36,12 +36,13 @@ void setup() {
   arm_servo.attach(arm_servo_pin);
   wrist_servo.attach(wrist_servo_pin);
   claw_servo.attach(claw_servo_pin);
-
-  // defalut pos of all servos
-  arm_servo.write(90);
   
   Serial.begin(9600);
   delay(2000);
+
+  // defalut pos of all servos
+  arm_servo.write(180);
+  wrist_servo.write(180);
 }
 
 void backward() {
@@ -129,6 +130,12 @@ void loop() {
     if ((command_code >= 10) && (command_code <= 18)){
       int pos = map(command_code, 10, 18, 0, 180);
       arm_servo.write(pos);
+      delay(100);
+    }
+
+	if ((command_code >= 20) && (command_code <= 28)){
+      int pos = map(command_code, 20, 28, 0, 180);
+      wrist_servo.write(pos);
       delay(100);
     }
     
